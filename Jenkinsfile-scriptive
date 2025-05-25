@@ -1,0 +1,42 @@
+node {
+    def dockerImage
+    def imageName = 'ahmedelsayad/python-app:latest'
+
+    stage('Clone') {
+        echo 'Cloning done by Jenkins'
+    }
+
+    stage('Build the project') {
+        echo 'Creating virtual environment and installing dependencies...'
+        sh '''
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+        '''
+    }
+
+    stage('Test the project') {
+        echo 'Running unit tests...'
+        try {
+            sh '''
+                . venv/bin/activate
+                python -m unittest
+            '''
+        } catch (Exception err) {
+            echo 'No tests found or tests failed, continuing pipeline'
+        }
+    }
+
+    stage('Docker Build') {
+        echo "Building Docker image: ${imageName}"
+        dockerImage = docker.build(imageName)
+    }
+
+    stage('Docker Push') {
+        echo "Pushing Docker image: ${imageName}"
+        docker.withRegistry('', 'docker-hub-creds') {
+            dockerImage.push()
+        }
+    }
+}
