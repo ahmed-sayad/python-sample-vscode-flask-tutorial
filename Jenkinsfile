@@ -1,8 +1,5 @@
 pipeline {
-    agent any{
-         label 'docker-node'
-    }
-    
+    agent any
 
     stages {
         stage('Clone') {
