@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+        dockerImage = docker.build("ahmedelsayad/python-app")
         stage('Clone') {
             steps {
                 echo 'Cloning done by Jenkins'
@@ -43,15 +44,16 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t ahmedelsayad/python-app .'
+                script {
+                    dockerImage = docker.build("ahmedelsayad/234744asdasd")
+                }
             }
         }
 
         stage('Docker Push') {
             steps {
-                script {
-                    withDockerRegistry([credentialsId: 'ahmedelsayad', url: '']) {
-                        docker.image('python-app').push()
+                    withDockerRegistry(credentialsId: 'ahmedelsayad/234744asdasd', url: '') {
+                        dockerImage.push()
                     }
             }
         }
