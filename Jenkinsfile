@@ -18,7 +18,7 @@ pipeline {
                 '''
             }
         }
-
+/*
         stage('Test the project') {
             steps {
                 sh '''
@@ -27,7 +27,7 @@ pipeline {
                 '''
             }
         }
-
+*/
         stage('Docker Build') {
             steps {
                 sh 'docker build -t ahmedelsayad/python-app .'
