@@ -51,10 +51,12 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                    withDockerRegistry(credentialsId: 'ahmedelsayad/234744asdasd', url: '') {
-                        dockerImage.push()
-                    }
+                script {
+            withDockerRegistry(credentialsId: 'ahmedelsayad/234744asdasd', url: '') {
+                dockerImage.push()
             }
         }
+    }
+}
     }
 }
