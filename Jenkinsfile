@@ -18,24 +18,14 @@ pipeline {
                 '''
             }
         }
-/*
-        stage('Test the project') {
-            steps {
-                sh '''
-                . venv/bin/activate
-                python -m unittest
-                '''
-            }
-        }
-*/
 
         stage('Test the project') {
             steps {
                 script {
                     try {
-                            sh '. venv/bin/activate && python -m unittest'
+                        sh '. venv/bin/activate && python -m unittest'
                     } catch (err) {
-                            echo "No tests found or tests failed, continuing pipeline"
+                        echo "No tests found or tests failed, continuing pipeline"
                     }
                 }
             }
@@ -52,11 +42,11 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
-            withDockerRegistry(credentialsId: 'ahmedelsayad/234744asdasd', url: '') {
-                dockerImage.push()
+                    withDockerRegistry(credentialsId: 'dockerhub-credentials', url: '') {
+                        dockerImage.push()
+                    }
+                }
             }
         }
-    }
-}
     }
 }
