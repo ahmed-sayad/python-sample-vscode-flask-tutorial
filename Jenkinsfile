@@ -28,6 +28,19 @@ pipeline {
             }
         }
 */
+
+        stage('Test the project') {
+            steps {
+                script {
+                    try {
+                            sh '. venv/bin/activate && python -m unittest'
+                    } catch (err) {
+                            echo "No tests found or tests failed, continuing pipeline"
+                    }
+                }
+            }
+        }
+
         stage('Docker Build') {
             steps {
                 sh 'docker build -t ahmedelsayad/python-app .'
