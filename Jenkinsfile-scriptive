@@ -1,6 +1,6 @@
 node {
     def dockerImage
-    def imageName = 'ahmedelsayad/python-app:latest'
+    def imageName = 'ahmedelsayad/python-app-scriptive:latest'
 
     stage('Clone') {
         echo 'Cloning done by Jenkins'
