@@ -49,9 +49,10 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                withDockerRegistry([credentialsId: 'docker-hub-creds', url: '']) {
-                    sh 'docker push ahmedelsayad/python-app'
-                }
+                script {
+                    withDockerRegistry([credentialsId: 'ahmedelsayad', url: '']) {
+                        docker.image('python-app').push()
+                    }
             }
         }
     }
