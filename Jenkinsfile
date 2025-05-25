@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent any{
+         label 'docker-node'
+    }
+    
 
     stages {
         stage('Clone') {
@@ -33,9 +36,9 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                script {
-                    dockerImage = docker.build("ahmedelsayad/234744asdasd")
-                }
+            script {
+            dockerImage = docker.build("ahmedelsayad/python-app:latest")
+            }
             }
         }
 
