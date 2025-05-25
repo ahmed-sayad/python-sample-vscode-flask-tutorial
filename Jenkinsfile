@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-        dockerImage = docker.build("ahmedelsayad/python-app")
         stage('Clone') {
             steps {
                 echo 'Cloning done by Jenkins'
