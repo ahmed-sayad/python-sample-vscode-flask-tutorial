@@ -1,3 +1,3 @@
 @Library('sharedlib') _
-pythonPipeline.run()
 
+pythonPipeline()
